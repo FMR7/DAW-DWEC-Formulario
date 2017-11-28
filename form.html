@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Formulario</title>
+  <style>
+      table{
+          margin: auto;
+          min-width: 450px;
+      }
+      .texto{
+          text-align: right;
+          color: blue;
+          font-weight: bold;
+      }
+      #diaNac,#mesNac{width: 30px; text-align: center;}
+      #anoNac{width: 60px; text-align: center;}
+      #req{text-align: left;}
+  </style>
+
+  <script type="text/javascript">
+    //Fernando
+
+      function comprobarForm(){
+        var bool = true;
+        var inputs = document.getElementsByClassName("valor");
+
+        //Imprime id y valor
+        for(var i=0; i<inputs.length; i++){
+            //console.log(i + "-" + inputs[i].id+": "+inputs[i].value);
+        }
+        
+        
+        for(var i=0; i<inputs.length; i++){
+            var input = inputs[i];
+            var id = input.id;
+            var valor = input.value;
+            
+            //Comprueba si estan vacios o con valores por defecto
+            if((valor == "")||(valor == "dia")||(valor == "mes")||(valor == "año")){
+                //console.log("campo \'" + inputs[i].id + "\' vacio");
+                switchColor(inputs[i]);
+                bool = false;
+            }else if(input.style.border=="2px solid red"){
+                switchColor(inputs[i]);
+            }
+            
+            //console.log(id + ", valor: " + valor);
+            switch(id){
+                    case "age":
+                        if((valor<1)||(valor>150)){
+                            console.log(id + ": INCORRECTA, valor: " + valor);
+                            
+                            switchColor(input);
+                            //______________________________________
+                            bool=false;
+                        }
+                        break;
+                    case "diaNac":
+
+                        break;
+                    case "mesNac":
+
+                        break;
+                    case "anoNac":
+
+                        break;
+                    case "dni":
+
+                        break;
+                    case "dniLetra":
+
+                        break;
+                    case "dir":
+                        
+                        break;
+                    case "cp":
+                        
+                        break;
+                    case "tel":
+
+                        break;
+                    case "mail":
+
+                        break;
+                    case "mailConfirm":
+
+                        break;
+                    case "pass":
+
+                        break;
+                    case "passConfirm":
+
+                        break;
+                }
+        }
+        //_________________SEGUIR POR AQUI_________________
+        
+        
+        return bool;
+      }
+      
+      
+      //Carga las provincias en el select 'prov'
+      function selectProvincias(){
+          var provincias = ["Valencia", "Alicante", "Castellon"];
+          var oProvs = document.getElementById("prov");
+          for(var i=0; i<provincias.length; i++){
+              var eProv = document.createElement("option");
+              eProv.value = provincias[i];
+              eProv.innerHTML = provincias[i];
+              oProvs.appendChild(eProv);
+          }
+      }
+
+      
+      //Llama a la funcion 'loadLocalidades()' y le pasa un array con todas 
+      //las localidades de la provincia que se le pasa como parametro
+      function selectLocalidades(provincia){
+          var ALICANTE = "ALACANT^ALBATERA^ALCOI^ALFÁS DEL PÍ^ALMORADI^ASPE^ALTEA^BANYERES DE MARIOLA^BENIDORM^BENISSA^CALLOSA D'EN SARRIÀ^CALLOSA DEL SEGURA^CALP^CASTALLA^COCENTAINA^COX^CREVILLENT^DÉNIA^DOLORES^EL CAMPELLO^ELDA^ELX^FINESTRAT^GUARDAMAR^IBI^JIJONA/XIXONA^LA NUCIA^LA VILA JOIOSA^MONOVAR^MONFORTE DEL CID^MURO DE ALCOY^MUTXAMEL^NOVELDA^ONIL^ORIHUELA^PEGO^PETRER^PILAR DE LA HORADADA^PINOSO^ROJALES^SAN JUAN DE ALICANTE^SANT VICENT DEL RASPEIG^SANTA POLA^SAX^TEULADA^TORREVIEJA^VILLENA^XÀBIA";
+
+          var CASTELLON_DE_LA_PLANA = "ALCALÀ DE XIVERT^ALCORA^ALMASSORA^ALMENARA^BENICARLÓ^BENICASSIM^BETXÍ^BURRIANA^CASTELLÓ DE LA PLANA^LA VALL DUIXÓ^NULES^ONDA^OROPESA DEL MAR^PEÑÍSCOLA^SEGORBE^TORREBLANCA^VILA-REAL^VINARÒS";
+
+          var VALENCIA = "ALAQUÀS^ALBAL^ALBERIC^ALBORAYA^ALCÀSSER^ALDAIA^ALFAFAR^ALGEMESÍ^ALGINET^ALMÀSSERA^ALMUSSAFES^ALZIRA^BENAGUASIL^BENETÚSSER^BENIFAIÒ^BENIMAMET^BENIPARRELL^BETERA^BOCAIRENT^BONREPÒS I MIRAMBELL^BUÑOL^BURJASSOT^CANALS^CANETD'ENBERENGUER^CARCAIXENT^CARLET^CATARROJA^CHIVA^CULLERA^GANDIA^GODELLA^L'ALCÚDIA^L'ELIANA^L'OLLERIA^LLÍRIA^MANISES^MASSAMAGRELL^MASSANASSA^MELIANA^MISLATA^MONCADA^OLIVA^ONTINYENT^PAIPORTA^PATERNA^PICANYA^PICASSENT^POBLA DE VALLBONA^PUÇOL^PUIG^QUART DE POBLET^REQUENA^RIBA ROJA DE TURIA^SAGUNT^SEDAVÍ^SILLA^SUECA^TAVERNES BLANQUES^TAVERNES DE VALLDIGNA^TORRENT^UTIEL^VALENCIA^VALLADA^VILLANUEVA DE CASTELLÓN^XÀTIVA^XIRIVELLA";
+
+          switch(provincia){
+            case "Valencia":
+              var localidades = VALENCIA.split("^");
+              loadLocalidades(localidades);
+              break;
+            case "Alicante":
+              var localidades = ALICANTE.split("^");
+              loadLocalidades(localidades);
+              break;
+            case "Castellon":
+              var localidades = CASTELLON_DE_LA_PLANA.split("^");
+              loadLocalidades(localidades);
+              break;
+          }
+    }
+
+      
+      //Carga las localidades, que se le pasan como un array, en el select 'loc'
+      function loadLocalidades(localidades){
+          var oLocs = document.getElementById("loc");
+          while (oLocs.lastChild) {//Vaciamos las localidades del combobox
+              oLocs.removeChild(oLocs.lastChild);
+          }
+          for(var i=0; i<localidades.length; i++){//Cargamos las nuevas localidades
+              var eLoc = document.createElement("option");
+              eLoc.value = localidades[i];
+              eLoc.innerHTML = localidades[i];
+              oLocs.appendChild(eLoc);
+          }
+      }
+
+      
+      //Comprueba la tecla pulsada para el campo en cuestion
+      function checkKey(evento){
+        var keyCode = evento.keyCode || evento.which;
+        var key = String.fromCharCode(keyCode);
+        var input = evento.target;
+        var id = input.id;
+        console.log("ID:"+id+" KEY:"+key);
+        console.log("ID:"+id+" KEYCODE:"+keyCode);
+
+        //Excluimos teclas: flechas(derecha e izquierda), suprimir, inicio y fin.
+        var exclusiones = [35, 36, 37, 39, 46];
+        for(var i=0; i<exclusiones.length; i++){
+            if(keyCode==exclusiones[i]){
+                return true;
+            }
+        }
+
+
+        var reg;
+        switch(id){
+            case "name":
+                reg = /[a-zA-Z\s\b]/;
+                break;
+            case "age":
+                reg = /[0-9\b]/;
+                break;
+            case "diaNac":
+                reg = /[0-9\b]/;
+                break;
+            case "mesNac":
+                reg = /[0-9\b]/;
+                break;
+            case "anoNac":
+                reg = /[0-9\b]/;
+                break;
+            case "dni":
+                reg = /[0-9\b]/;
+                break;
+            case "dniLetra":
+                reg = /[a-zA-Z\b]/;
+                break;
+            case "dir":
+                reg = /[a-zA-Z0-9\s\b]/;
+                break;
+            case "cp":
+                reg = /[0-9\b]/;
+                break;
+            case "tel":
+                reg = /[0-9\s\b]/;
+                break;
+            case "mail":
+                reg = /[a-zA-Z0-9\@\.\b]/;
+                break;
+            case "mailConfirm":
+                reg = /[a-zA-Z0-9\@\.\b]/;
+                break;
+            default:
+                return true;
+        }
+        var bool = false;
+        if(reg.test(key)){
+            bool = true;
+        }else{
+            bool = false;
+        }
+        return bool;
+    }
+
+      
+      //onblur para los campos obligatorios
+      function checkInputs(evento){
+        var input = evento.target;
+        var id = input.id;
+        console.log("onBlur ID:"+id);
+
+        switch(id){
+            case "name":
+                switchColor(input);
+                break;
+            case "dir":
+                switchColor(input);
+                break;
+            case "cp":
+                switchColor(input);
+                break;
+        }
+      }
+
+      
+      //Cambia el color del borde segun el estado del input
+      function switchColor(input){
+        if((input.value == "")||
+           (input.value == "dia")||
+           (input.value == "mes")||
+           (input.value == "año")){
+            input.style.border = "2px solid red";
+            input.style.borderRadius = "4px";
+            console.log(input.id);
+        }else{
+            input.style.border = "";
+            input.style.borderRadius = "";
+        }
+      }
+
+      
+      //EVENTOS
+      window.onload = function() {
+        var oForm = document.getElementById("form1");
+        oForm.addEventListener("submit", function(evento){
+            if(comprobarForm()){
+                oForm.submit();
+            }else{
+                evento.preventDefault();
+            }
+        });
+
+          
+        selectProvincias();
+        selectLocalidades(document.getElementById("prov").value);
+
+          
+        document.getElementById("prov").onchange = function() {
+            selectLocalidades(this.value);
+        };
+
+
+        var inputs = document.getElementsByClassName("valor");
+        for(var i=0; i<inputs.length; i++){
+
+                //Filtramos la entrada de datos
+                inputs[i].onkeypress = function(evento) {
+                    return checkKey(evento);
+                }
+
+                var a = "";
+                //Gana foco
+                inputs[i].onfocus = function(evento){
+
+
+                    //-----
+                    a = evento.target.value;
+                    if((a=="dia")||a=="mes"||(a=="año")){
+                        evento.target.value = "";
+                    }
+                }
+
+                //Pierde foco
+                inputs[i].onblur = function(evento){
+                    checkInputs(evento);
+
+                    //-----
+                    var id = evento.target.id;
+                    if((id=="diaNac")||(id=="mesNac")||(id=="anoNac")){
+                        if(evento.target.value == ""){
+                           evento.target.value = a;
+                        }
+                    }
+                }
+            }
+      }
+
+  </script>
+</head>
+
+<body>
+   <form id="form1" action="">
+      <table>
+          <tr><td class="texto">Nombre*</td><td>
+              <input class="valor" id="name" type="text"></td></tr>
+
+          <tr><td class="texto">Edad</td><td>
+              <input class="valor" id="age" type="text"></td></tr>
+
+          <tr><td class="texto">Fecha nacimiento</td><td>
+              <input class="valor" id="diaNac" type="text" value="dia">/
+              <input class="valor" id="mesNac" type="text" value="mes">/
+              <input class="valor" id="anoNac" type="text" value="año"></td></tr>
+
+          <tr><td class="texto">DNI</td><td>
+              <input class="valor" id="dni" type="text">--
+              <input class="valor" id="dniLetra" type="text" maxlength="1" style="width: 20px; text-align: center;"></td></tr>
+
+          <tr><td class="texto">Direccion*</td><td>
+              <input class="valor" id="dir" type="text"></td></tr>
+
+          <tr><td class="texto">Provincia</td><td>
+              <select class="valor" id="prov" name="provincia"></select></td></tr>
+
+          <tr><td class="texto">Localidad</td><td>
+              <select class="valor" id="loc" name="localidad"></select></td></tr>
+
+          <tr><td class="texto">Codigo Postal*</td><td>
+              <input class="valor" id="cp" type="text"></td></tr>
+
+          <tr><td class="texto">Telefono</td><td>
+              <input class="valor" id="tel" type="text"></td></tr>
+
+          <tr><td><br></td><td></td></tr>
+
+          <tr><td class="texto">Correo</td><td>
+              <input class="valor" id="mail" type="text"></td></tr>
+
+          <tr><td class="texto">Repita el correo</td><td>
+              <input class="valor" id="mailConfirm" type="text"></td></tr>
+
+          <tr><td class="texto">Contraseya</td><td>
+              <input class="valor" id="pass" type="password"></td></tr>
+
+          <tr><td class="texto">Repita la contraseya</td><td>
+              <input class="valor" id="passConfirm" type="password"></td></tr>
+
+          <tr><td></td><td id="req" class="texto">(*)Datos obligatorios</td></tr>
+          <tr><td><input type="reset" value="Empezar de nuevo"></td><td><input type="submit" value="Enviar los datos"></td></tr>
+      </table>
+    </form>
+</body>
+</html>
